@@ -1,0 +1,204 @@
+SQL> CREATE TABLE ITEMS_MASTER (
+  2      ID VARCHAR2(5) PRIMARY KEY,
+  3      NAME VARCHAR2(30),
+  4      ITEM_TYPE VARCHAR2(30),
+  5      PRICE NUMBER(10,2),
+  6      QUALITY VARCHAR2(15),
+  7      ITEM_PACK_DATE DATE
+  8  );
+
+Table created.
+
+SQL> INSERT INTO ITEMS_MASTER VALUES ('I1','Dairymilk','Chocolate',500,'Good','12-AUG-2000');
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO ITEMS_MASTER VALUES ('I2','Kajukatri','Mithai',1000,'Verygood','15-JAN-2016');
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO ITEMS_MASTER VALUES ('I3','Pizza','Fastfood',350,'Average','20-FEB-2015');
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO ITEMS_MASTER VALUES ('I4','Orangejuice','Juice',50,'Best','05-FEB-2016');
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO ITEMS_MASTER VALUES ('I5','Vanilla_cack','Bakery',2000,'Good','01-JAN-2016');
+
+1 row created.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> DESC ITEMS_MASTER;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL VARCHAR2(5)
+ NAME                                               VARCHAR2(30)
+ ITEM_TYPE                                          VARCHAR2(30)
+ PRICE                                              NUMBER(10,2)
+ QUALITY                                            VARCHAR2(15)
+ ITEM_PACK_DATE                                     DATE
+
+SQL> SELECT * FROM ITEMS_MASTER;
+
+ID    NAME                           ITEM_TYPE                           PRICE  
+----- ------------------------------ ------------------------------ ----------  
+QUALITY         ITEM_PACK                                                       
+--------------- ---------                                                       
+I1    Dairymilk                      Chocolate                             500  
+Good            12-AUG-00                                                       
+                                                                                
+I2    Kajukatri                      Mithai                               1000  
+Verygood        15-JAN-16                                                       
+                                                                                
+I3    Pizza                          Fastfood                              350  
+Average         20-FEB-15                                                       
+                                                                                
+
+ID    NAME                           ITEM_TYPE                           PRICE  
+----- ------------------------------ ------------------------------ ----------  
+QUALITY         ITEM_PACK                                                       
+--------------- ---------                                                       
+I4    Orangejuice                    Juice                                  50  
+Best            05-FEB-16                                                       
+                                                                                
+I5    Vanilla_cack                   Bakery                               2000  
+Good            01-JAN-16                                                       
+                                                                                
+
+SQL> 
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> SPOOL OFF;
+SQL> SELECT PRICE,QUALITY, ITEM_PACK_DATE
+  2  FROM ITEMS_MASTER;
+
+     PRICE QUALITY         ITEM_PACK                                            
+---------- --------------- ---------                                            
+       500 Good            12-AUG-00                                            
+      1000 Verygood        15-JAN-16                                            
+       350 Average         20-FEB-15                                            
+        50 Best            05-FEB-16                                            
+      2000 Good            01-JAN-16                                            
+
+SQL> SELECT *
+  2  FROM ITEMS_MASTER
+  3  ORDER BY QUALITY;
+
+ID    NAME                           ITEM_TYPE                           PRICE  
+----- ------------------------------ ------------------------------ ----------  
+QUALITY         ITEM_PACK                                                       
+--------------- ---------                                                       
+I3    Pizza                          Fastfood                              350  
+Average         20-FEB-15                                                       
+                                                                                
+I4    Orangejuice                    Juice                                  50  
+Best            05-FEB-16                                                       
+                                                                                
+I5    Vanilla_cack                   Bakery                               2000  
+Good            01-JAN-16                                                       
+                                                                                
+
+ID    NAME                           ITEM_TYPE                           PRICE  
+----- ------------------------------ ------------------------------ ----------  
+QUALITY         ITEM_PACK                                                       
+--------------- ---------                                                       
+I1    Dairymilk                      Chocolate                             500  
+Good            12-AUG-00                                                       
+                                                                                
+I2    Kajukatri                      Mithai                               1000  
+Verygood        15-JAN-16                                                       
+                                                                                
+
+SQL> SELECT DISTINCT QUALITY
+  2  FROM ITEMS_MASTER;
+
+QUALITY                                                                         
+---------------                                                                 
+Average                                                                         
+Best                                                                            
+Good                                                                            
+Verygood                                                                        
+
+SQL> UPDATE ITEMS_MASTER
+  2  SET QUALITY = 'Verygood'
+  3  WHERE QUALTY = 'Good';
+WHERE QUALTY = 'Good'
+      *
+ERROR at line 3:
+ORA-00904: "QUALTY": invalid identifier 
+
+
+SQL> CLEAR BUFFER;
+buffer cleared
+SQL> UPDATE ITEMS_MASTER
+  2  SET QUALITY = 'Verygood'
+  3  WHERE QUALITY = 'Good';
+
+2 rows updated.
+
+SQL> SELECT *
+  2  FROM ITEMS_MASTER
+  3  WHERE QUALITY = 'Verygood';
+
+ID    NAME                           ITEM_TYPE                           PRICE  
+----- ------------------------------ ------------------------------ ----------  
+QUALITY         ITEM_PACK                                                       
+--------------- ---------                                                       
+I1    Dairymilk                      Chocolate                             500  
+Verygood        12-AUG-00                                                       
+                                                                                
+I2    Kajukatri                      Mithai                               1000  
+Verygood        15-JAN-16                                                       
+                                                                                
+I5    Vanilla_cack                   Bakery                               2000  
+Verygood        01-JAN-16                                                       
+                                                                                
+
+SQL> ALTER TABLE ITEMS_MASTER
+  2  ADD ITEM_PUR_DATE DATE;
+
+Table altered.
+
+SQL> SELECT * FROM ITEMS_MASTER
+  2  WHERE PRICE > 500;
+
+ID    NAME                           ITEM_TYPE                           PRICE  
+----- ------------------------------ ------------------------------ ----------  
+QUALITY         ITEM_PACK ITEM_PUR_                                             
+--------------- --------- ---------                                             
+I2    Kajukatri                      Mithai                               1000  
+Verygood        15-JAN-16                                                       
+                                                                                
+I5    Vanilla_cack                   Bakery                               2000  
+Verygood        01-JAN-16                                                       
+                                                                                
+
+SQL> DELETE FROM ITEMS_MASTER
+  2  WHERE PRICE = 50;
+
+1 row deleted.
+
+SQL> RNAME ITEMS_MASTER TO ITEM_DETAIL;
+SP2-0734: unknown command beginning "RNAME ITEM..." - rest of line ignored.
+SQL> CLEAR BUFFER;
+buffer cleared
+SQL> RENAME ITEMS_MASTER TO ITEM_DETAIL;
+
+Table renamed.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> SPOOL OFF;
