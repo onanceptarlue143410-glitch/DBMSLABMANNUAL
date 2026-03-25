@@ -1,0 +1,636 @@
+SQL> CREATE TABLE DEPOSIT (
+  2      ACTNO  VARCHAR2(5),
+  3      CNAME  VARCHAR2(15),
+  4      BNAME  VARCHAR2(15),
+  5      AMOUNT NUMBER(9,2),
+  6      ADATE  DATE
+  7  );
+
+Table created.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> SPOOL OFF;
+SQL> CREATE TABLE BRANCH (
+  2      BNAME VARCHAR2(15),
+  3      CITY  VARCHAR2(15)
+  4  );
+
+Table created.
+
+SQL> CREATE TABLE CUSTOMERS (
+  2      CNAME VARCHAR2(15),
+  3      CITY  VARCHAR2(15)
+  4  );
+
+Table created.
+
+SQL> CREATE TABLE BORROW (
+  2      LOANNO VARCHAR2(5),
+  3      CNAME  VARCHAR2(15),
+  4      BNAME  VARCHAR2(15),
+  5      AMOUNT NUMBER(9,2)
+  6  );
+
+Table created.
+
+SQL> INSERT INTO DEPOSIT VALUES (100, 'ANIL',    'VRCE',        1000.00, TO_DATE('01-MAR-95','DD-MON-YY'));
+
+1 row created.
+
+SQL> INSERT INTO DEPOSIT VALUES (101, 'SUNIL',   'AJNI',        5000.00, TO_DATE('04-JAN-96','DD-MON-YY'));
+
+1 row created.
+
+SQL> INSERT INTO DEPOSIT VALUES (102, 'MEHUL',   'KAROLBAGH',   3500.00, TO_DATE('17-NOV-95','DD-MON-YY'));
+
+1 row created.
+
+SQL> INSERT INTO DEPOSIT VALUES (104, 'MADHURI', 'CHANDI',      1200.00, TO_DATE('17-DEC-95','DD-MON-YY'));
+
+1 row created.
+
+SQL> INSERT INTO DEPOSIT VALUES (105, 'PRMOD',   'M G ROAD',    3000.00, TO_DATE('27-MAR-96','DD-MON-YY'));
+
+1 row created.
+
+SQL> INSERT INTO DEPOSIT VALUES (106, 'SANDIP',  'ANDHERI',     2000.00, TO_DATE('31-MAR-96','DD-MON-YY'));
+
+1 row created.
+
+SQL> INSERT INTO DEPOSIT VALUES (107, 'SHIVANI', 'VIRAR',       1000.00, TO_DATE('05-SEP-95','DD-MON-YY'));
+
+1 row created.
+
+SQL> INSERT INTO DEPOSIT VALUES (108, 'KRANTI',  'NEHRU PLACE', 5000.00, TO_DATE('02-JUL-95','DD-MON-YY'));
+
+1 row created.
+
+SQL> INSERT INTO DEPOSIT VALUES (109, 'MINU',    'POWAI',       7000.00, TO_DATE('10-AUG-95','DD-MON-YY'));
+
+1 row created.
+
+SQL> SELECT * FROM deposit;
+
+ACTNO CNAME           BNAME               AMOUNT ADATE                          
+----- --------------- --------------- ---------- ---------                      
+100   ANIL            VRCE                  1000 01-MAR-95                      
+101   SUNIL           AJNI                  5000 04-JAN-96                      
+102   MEHUL           KAROLBAGH             3500 17-NOV-95                      
+104   MADHURI         CHANDI                1200 17-DEC-95                      
+105   PRMOD           M G ROAD              3000 27-MAR-96                      
+106   SANDIP          ANDHERI               2000 31-MAR-96                      
+107   SHIVANI         VIRAR                 1000 05-SEP-95                      
+108   KRANTI          NEHRU PLACE           5000 02-JUL-95                      
+109   MINU            POWAI                 7000 10-AUG-95                      
+
+9 rows selected.
+
+SQL> DESC deposit;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ACTNO                                              VARCHAR2(5)
+ CNAME                                              VARCHAR2(15)
+ BNAME                                              VARCHAR2(15)
+ AMOUNT                                             NUMBER(9,2)
+ ADATE                                              DATE
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> SPOOL OFF;
+SQL> INSERT INTO BRANCH VALUES ('VRCE','NAGPUR');
+
+1 row created.
+
+SQL> INSERT INTO BRANCH VALUES ('AJNI','NAGPUR');
+
+1 row created.
+
+SQL> INSERT INTO BRANCH VALUES ('KAROLBAGH','DELHI');
+
+1 row created.
+
+SQL> INSERT INTO BRANCH VALUES ('CHANDI','DELHI');
+
+1 row created.
+
+SQL> INSERT INTO BRANCH VALUES ('DHARAMPETH','NAGPUR');
+
+1 row created.
+
+SQL> INSERT INTO BRANCH VALUES ('M G ROAD','BANGLORE');
+
+1 row created.
+
+SQL> INSERT INTO BRANCH VALUES ('ANDHERI','BOMBAY');
+
+1 row created.
+
+SQL> INSERT INTO BRANCH VALUES ('VIRAR','BOMBAY');
+
+1 row created.
+
+SQL> INSERT INTO BRANCH VALUES ('NEHRU PALACE','DELHI');
+
+1 row created.
+
+SQL> INSERT INTO BRANCH VALUES ('POWAI','BOMAY');
+
+1 row created.
+
+SQL> SELECT * FROM BRANCH;
+
+BNAME           CITY                                                            
+--------------- ---------------                                                 
+VRCE            NAGPUR                                                          
+AJNI            NAGPUR                                                          
+KAROLBAGH       DELHI                                                           
+CHANDI          DELHI                                                           
+DHARAMPETH      NAGPUR                                                          
+M G ROAD        BANGLORE                                                        
+ANDHERI         BOMBAY                                                          
+VIRAR           BOMBAY                                                          
+NEHRU PALACE    DELHI                                                           
+POWAI           BOMAY                                                           
+
+10 rows selected.
+
+SQL> DESC BRANCH;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ BNAME                                              VARCHAR2(15)
+ CITY                                               VARCHAR2(15)
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> INSERT INTO CUSTOMERS VALUES ('ANIL','CALCUTTA');
+
+1 row created.
+
+SQL> INSERT INTO CUSTOMERS VALUES ('SUNIL','DELHI');
+
+1 row created.
+
+SQL> INSERT INTO CUSTOMERS VALUES ('MEHUL','BARODA');
+
+1 row created.
+
+SQL> INSERT INTO CUSTOMERS VALUES ('MANDAR','PATNA');
+
+1 row created.
+
+SQL> INSERT INTO CUSTOMERS VALUES ('MADHURI','NAGPUR');
+
+1 row created.
+
+SQL> INSERT INTO CUSTOMERS VALUES ('PRAMOD','NAGPUR');
+
+1 row created.
+
+SQL> INSERT INTO CUSTOMERS VALUES ('SANDIP','SURAT');
+
+1 row created.
+
+SQL> INSERT INTO CUSTOMERS VALUES ('SHIVANI','BOMBAY');
+
+1 row created.
+
+SQL> INSERT INTO CUSTOMER VALUES ('KRANTI','BOMBAY');
+INSERT INTO CUSTOMER VALUES ('KRANTI','BOMBAY')
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> INSERT INTO CUSTOMERS VALUES ('KRANTI','BOMBAY');
+
+1 row created.
+
+SQL> INSERT INTO CUSTOMERS VALUES ('NAREN','BOMBAY');
+
+1 row created.
+
+SQL> SELECT * FROM CUSTOMERS;
+
+CNAME           CITY                                                            
+--------------- ---------------                                                 
+ANIL            CALCUTTA                                                        
+SUNIL           DELHI                                                           
+MEHUL           BARODA                                                          
+MANDAR          PATNA                                                           
+MADHURI         NAGPUR                                                          
+PRAMOD          NAGPUR                                                          
+SANDIP          SURAT                                                           
+SHIVANI         BOMBAY                                                          
+KRANTI          BOMBAY                                                          
+NAREN           BOMBAY                                                          
+
+10 rows selected.
+
+SQL> DESC CUSTOMERS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CNAME                                              VARCHAR2(15)
+ CITY                                               VARCHAR2(15)
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> SPOOL OFF;
+SQL> INSERT INTO DEPOSIT VALUES (100, 'ANIL', 'VRCE', 1000.00, '01-MAR-95');
+
+1 row created.
+
+SQL> INSERT INTO DEPOSIT VALUES (101, 'SUNIL', 'AJNI', 5000.00, '04-JAN-96');
+
+1 row created.
+
+SQL> INSERT INTO DEPOSIT VALUES (102, 'MEHUL', 'KAROLBAGH', 3500.00, '17-NOV-95');
+
+1 row created.
+
+SQL> INSERT INTO DEPOSIT VALUES (104, 'MADHURI', 'CHANDI', 1200.00, '17-DEC-95');
+
+1 row created.
+
+SQL> INSERT INTO DEPOSIT VALUES (105, 'PRMOD', 'M G ROAD', 3000.00, '27-MAR-96');
+
+1 row created.
+
+SQL> INSERT INTO DEPOSIT VALUES (106, 'SANDIP', 'ANDHERI', 2000.00, '31-MAR-96');
+
+1 row created.
+
+SQL> INSERT INTO DEPOSIT VALUES (107, 'SHIVANI', 'VIRAR', 1000.00, '05-SEP-95');
+
+1 row created.
+
+SQL> INSERT INTO DEPOSIT VALUES (108, 'KRANTI', 'NEHRU PLACE', 5000.00, '02-JUL-95');
+
+1 row created.
+
+SQL> INSERT INTO DEPOSIT VALUES (109, 'MINU', 'POWAI', 7000.00, '10-AUG-95');
+
+1 row created.
+
+SQL> INSERT INTO BRANCH VALUES ('VRCE', 'NAGPUR');
+
+1 row created.
+
+SQL> INSERT INTO BRANCH VALUES ('AJNI', 'NAGPUR');
+
+1 row created.
+
+SQL> INSERT INTO BRANCH VALUES ('KAROLBAGH', 'DELHI');
+
+1 row created.
+
+SQL> INSERT INTO BRANCH VALUES ('CHANDI', 'DELHI');
+
+1 row created.
+
+SQL> INSERT INTO BRANCH VALUES ('DHARAMPETH', 'NAGPUR');
+
+1 row created.
+
+SQL> INSERT INTO BRANCH VALUES ('M G ROAD', 'BANGLORE');
+
+1 row created.
+
+SQL> INSERT INTO BRANCH VALUES ('ANDHERI', 'BOMBAY');
+
+1 row created.
+
+SQL> INSERT INTO BRANCH VALUES ('VIRAR', 'BOMBAY');
+
+1 row created.
+
+SQL> INSERT INTO BRANCH VALUES ('NEHRU PLACE','DELHI');
+
+1 row created.
+
+SQL> INSERT INTO BRANCH VALUES ('POWAI','BOMBAY');
+
+1 row created.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> INSERT INTO CUSTOMERS VALUES ('ANIL', 'CALCUTTA');
+
+1 row created.
+
+SQL> INSERT INTO CUSTOMERS VALUES ('SUNIL', 'DELHI');
+
+1 row created.
+
+SQL> INSERT INTO CUSTOMERS VALUES ('MEHUL', 'BARODA');
+
+1 row created.
+
+SQL> INSERT INTO CUSTOMERS VALUES ('MANDAR', 'PATNA');
+
+1 row created.
+
+SQL> INSERT INTO CUSTOMERS VALUES ('MADHURI', 'NAGPUR');
+
+1 row created.
+
+SQL> INSERT INTO CUSTOMERS VALUES ('PRAMOD', 'NAGPUR');
+
+1 row created.
+
+SQL> INSERT INTO CUSTOMERS VALUES ('SANDIP', 'SURAT');
+
+1 row created.
+
+SQL> INSERT INTO CUSTOMERS VALUES ('SHIVANI', 'BOMBAY');
+
+1 row created.
+
+SQL> INSERT INTO CUSTOMERS VALUES ('DELHI','KRANTI');
+
+1 row created.
+
+SQL> INSERT INTO CUSTOMERS VALUES ('BOMBAY','NAREN');
+
+1 row created.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> INSERT INTO BORROW VALUES (201, 'ANIL', 'VRCE', 1000);
+
+1 row created.
+
+SQL> INSERT INTO BORROW VALUES (206, 'MEHUL', 'AJNI', 5000);
+
+1 row created.
+
+SQL> INSERT INTO BORROW VALUES (311, 'SUNIL', 'DHARAMPETH', 3000);
+
+1 row created.
+
+SQL> INSERT INTO BORROW VALUES (321, 'MADHURI', 'ANDHERI', 2000);
+
+1 row created.
+
+SQL> INSERT INTO BORROW VALUES (375, 'PRMOD', 'VIRAR', 8000);
+
+1 row created.
+
+SQL> INSERT INTO BORROW VALUES (481, 'KRANTI', 'NEHRU PLACE', 3000);
+
+1 row created.
+
+SQL> INSERT INTO BORROW VALUES (201, 'ANIL', 'VRCE', 1000);
+
+1 row created.
+
+SQL> INSERT INTO BORROW VALUES (206, 'MEHUL', 'AJNI', 5000);
+
+1 row created.
+
+SQL> INSERT INTO BORROW VALUES (311, 'SUNIL', 'DHARAMPETH', 3000);
+
+1 row created.
+
+SQL> INSERT INTO BORROW VALUES (321, 'MADHURI', 'ANDHERI', 2000);
+
+1 row created.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> DESC DEPOSIT;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ACTNO                                              VARCHAR2(5)
+ CNAME                                              VARCHAR2(15)
+ BNAME                                              VARCHAR2(15)
+ AMOUNT                                             NUMBER(9,2)
+ ADATE                                              DATE
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> DESC BRANCH;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ BNAME                                              VARCHAR2(15)
+ CITY                                               VARCHAR2(15)
+
+SQL> DESC BORROW;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ LOANNO                                             VARCHAR2(5)
+ CNAME                                              VARCHAR2(15)
+ BNAME                                              VARCHAR2(15)
+ AMOUNT                                             NUMBER(9,2)
+
+SQL> DESC CUSTOMERS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CNAME                                              VARCHAR2(15)
+ CITY                                               VARCHAR2(15)
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> SELECT * FROM DEPOSIT;
+
+ACTNO CNAME           BNAME               AMOUNT ADATE                          
+----- --------------- --------------- ---------- ---------                      
+100   ANIL            VRCE                  1000 01-MAR-95                      
+101   SUNIL           AJNI                  5000 04-JAN-96                      
+102   MEHUL           KAROLBAGH             3500 17-NOV-95                      
+104   MADHURI         CHANDI                1200 17-DEC-95                      
+105   PRMOD           M G ROAD              3000 27-MAR-96                      
+106   SANDIP          ANDHERI               2000 31-MAR-96                      
+107   SHIVANI         VIRAR                 1000 05-SEP-95                      
+108   KRANTI          NEHRU PLACE           5000 02-JUL-95                      
+109   MINU            POWAI                 7000 10-AUG-95                      
+100   ANIL            VRCE                  1000 01-MAR-95                      
+101   SUNIL           AJNI                  5000 04-JAN-96                      
+
+ACTNO CNAME           BNAME               AMOUNT ADATE                          
+----- --------------- --------------- ---------- ---------                      
+102   MEHUL           KAROLBAGH             3500 17-NOV-95                      
+104   MADHURI         CHANDI                1200 17-DEC-95                      
+105   PRMOD           M G ROAD              3000 27-MAR-96                      
+106   SANDIP          ANDHERI               2000 31-MAR-96                      
+107   SHIVANI         VIRAR                 1000 05-SEP-95                      
+108   KRANTI          NEHRU PLACE           5000 02-JUL-95                      
+109   MINU            POWAI                 7000 10-AUG-95                      
+
+18 rows selected.
+
+SQL> SELECT * FROM BORROW;
+
+LOANN CNAME           BNAME               AMOUNT                                
+----- --------------- --------------- ----------                                
+201   ANIL            VRCE                  1000                                
+206   MEHUL           AJNI                  5000                                
+311   SUNIL           DHARAMPETH            3000                                
+321   MADHURI         ANDHERI               2000                                
+375   PRMOD           VIRAR                 8000                                
+481   KRANTI          NEHRU PLACE           3000                                
+201   ANIL            VRCE                  1000                                
+206   MEHUL           AJNI                  5000                                
+311   SUNIL           DHARAMPETH            3000                                
+321   MADHURI         ANDHERI               2000                                
+
+10 rows selected.
+
+SQL> SELECT * FROM CUSTOMERS;
+
+CNAME           CITY                                                            
+--------------- ---------------                                                 
+ANIL            CALCUTTA                                                        
+SUNIL           DELHI                                                           
+MEHUL           BARODA                                                          
+MANDAR          PATNA                                                           
+MADHURI         NAGPUR                                                          
+PRAMOD          NAGPUR                                                          
+SANDIP          SURAT                                                           
+SHIVANI         BOMBAY                                                          
+KRANTI          BOMBAY                                                          
+NAREN           BOMBAY                                                          
+ANIL            CALCUTTA                                                        
+
+CNAME           CITY                                                            
+--------------- ---------------                                                 
+SUNIL           DELHI                                                           
+MEHUL           BARODA                                                          
+MANDAR          PATNA                                                           
+MADHURI         NAGPUR                                                          
+PRAMOD          NAGPUR                                                          
+SANDIP          SURAT                                                           
+SHIVANI         BOMBAY                                                          
+DELHI           KRANTI                                                          
+BOMBAY          NAREN                                                           
+
+20 rows selected.
+
+SQL> SELECT * FROM BRANCH;
+
+BNAME           CITY                                                            
+--------------- ---------------                                                 
+VRCE            NAGPUR                                                          
+AJNI            NAGPUR                                                          
+KAROLBAGH       DELHI                                                           
+CHANDI          DELHI                                                           
+DHARAMPETH      NAGPUR                                                          
+M G ROAD        BANGLORE                                                        
+ANDHERI         BOMBAY                                                          
+VIRAR           BOMBAY                                                          
+NEHRU PALACE    DELHI                                                           
+POWAI           BOMAY                                                           
+VRCE            NAGPUR                                                          
+
+BNAME           CITY                                                            
+--------------- ---------------                                                 
+AJNI            NAGPUR                                                          
+KAROLBAGH       DELHI                                                           
+CHANDI          DELHI                                                           
+DHARAMPETH      NAGPUR                                                          
+M G ROAD        BANGLORE                                                        
+ANDHERI         BOMBAY                                                          
+VIRAR           BOMBAY                                                          
+NEHRU PLACE     DELHI                                                           
+POWAI           BOMBAY                                                          
+
+20 rows selected.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> SELECT ACTNO, AMOUNT
+  2  FROM DEPOSIT;
+
+ACTNO     AMOUNT                                                                
+----- ----------                                                                
+100         1000                                                                
+101         5000                                                                
+102         3500                                                                
+104         1200                                                                
+105         3000                                                                
+106         2000                                                                
+107         1000                                                                
+108         5000                                                                
+109         7000                                                                
+100         1000                                                                
+101         5000                                                                
+
+ACTNO     AMOUNT                                                                
+----- ----------                                                                
+102         3500                                                                
+104         1200                                                                
+105         3000                                                                
+106         2000                                                                
+107         1000                                                                
+108         5000                                                                
+109         7000                                                                
+
+18 rows selected.
+
+SQL> SELECT CNAME
+  2  FROM DEPOSIT
+  3  WHERE AMOUNT > 4000;
+
+CNAME                                                                           
+---------------                                                                 
+SUNIL                                                                           
+KRANTI                                                                          
+MINU                                                                            
+SUNIL                                                                           
+KRANTI                                                                          
+MINU                                                                            
+
+6 rows selected.
+
+SQL> SELECT CNAME
+  2  FROM DEPOSIT
+  3  WHERE ADATE > TO_DATE('01-DEC-1996','DD-MON-YYYY');
+
+CNAME                                                                           
+---------------                                                                 
+ANIL                                                                            
+SUNIL                                                                           
+MEHUL                                                                           
+MADHURI                                                                         
+PRMOD                                                                           
+SANDIP                                                                          
+SHIVANI                                                                         
+KRANTI                                                                          
+MINU                                                                            
+
+9 rows selected.
+
+SQL> SELECT CNAME
+  2  FROM DEPOSIT
+  3  WHERE CITY = 'BOMBAY';
+WHERE CITY = 'BOMBAY'
+      *
+ERROR at line 3:
+ORA-00904: "CITY": invalid identifier 
+
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> SPOOL OFF;
